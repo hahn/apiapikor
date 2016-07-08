@@ -37,7 +37,7 @@ Contoh hasil keluaran:
 }
 ```
 
-    ### Fungsi
+### Fungsi
 * list berita
 
 url: ```namadomain/api/v1.0/news```
