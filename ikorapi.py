@@ -128,4 +128,4 @@ def getDate(url):
                     print r.get_text().strip().encode("utf-8")
                 i += 1
 
-getUrl('http://www.inilahkoran.com/berita?page=1')
+# getUrl('http://www.inilahkoran.com/berita?page=1')
