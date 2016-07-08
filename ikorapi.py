@@ -31,6 +31,15 @@ def getUrl(url):
     soup = BeautifulSoup(result, "html.parser")
 
     for link in soup.find_all('li',{'class':'cssLineB'}):
+        #ambil link gambar
+        if(link.find('img') is None):
+            gambar.append('')
+        else:
+            for g in link.find_all('img'):
+                gmbr = urlInilah + g.get('src')
+                q = urlparse(gmbr).query.split('&')[0].strip('file=')
+                qgambar = urlInilah + '/gallery/' + q
+                gambar.append(qgambar)
         #ambil link berita dan judul
         for l in link.find_all('a', {'class':'cssTextHeaderContent'}) or link.find_all('a', {'class':'cssTextHeaderHeadline'}):
             link_berita = l.get('href')
@@ -40,11 +49,12 @@ def getUrl(url):
             judul.append(judul_berita)
 
         #ambil link gambar
-        for g in link.find_all('img'):
-            gmbr = urlInilah + g.get('src')
-            q = urlparse(gmbr).query.split('&')[0].strip('file=')
-            qgambar = urlInilah + '/gallery/' + q
-            gambar.append(qgambar)
+        # for g in link.find_all('img'):
+        #     gmbr = urlInilah + g.get('src')
+        #     q = urlparse(gmbr).query.split('&')[0].strip('file=')
+        #     qgambar = urlInilah + '/gallery/' + q
+        #     print qgambar
+        #     gambar.append(qgambar)
         #ambil nama penulis
         pi = 0
         for p in link.find_all('div',{'class':'cssTextSmall'}):
@@ -57,14 +67,14 @@ def getUrl(url):
                     waktu.append(wkt)
                 pi += 1
 
-    lg = len(gambar)
-    llb= len(link_berita)
-    if(lg < llb):
-        #ada berita yang tak pake gambar
-        beda = llb - lg
-        print beda
-        for i in xrange(beda):
-            gambar.append('')
+    # lg = len(gambar)
+    # llb= len(linkBerita)
+    # if(lg < llb):
+    #     #ada berita yang tak pake gambar
+    #     beda = llb - lg
+    #     print beda, llb, lg
+    #     for i in xrange(beda):
+    #         gambar.append('')
 
 
     # masukkan ke dict
@@ -118,4 +128,4 @@ def getDate(url):
                     print r.get_text().strip().encode("utf-8")
                 i += 1
 
-#getDate('http://www.inilahkoran.com/berita?page=0')
+getUrl('http://www.inilahkoran.com/berita?page=1')
