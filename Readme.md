@@ -1,7 +1,7 @@
 # apiapi
 Latihan (lagi) membuat API menggunakan python dan kawan-kawannya. Kali ini disimpan di Heroku. Hasilnya bisa dicoba di [sini.](https://apiapikor.herokuapp.com/api/v1.0/news)
 
-Studi kasus: mengambil daftar berita (scraping menggunakan librari Bs4) dari situs [inilahkoran](http://www.inilahkoran.com). Keluaran berupa berkas json yang memuat data tautan, judul, kategori, dan id berita.
+Studi kasus: mengambil daftar berita (scraping menggunakan librari Bs4) dari situs [inilahkoran](http://www.inilahkoran.com). Keluaran berupa berkas json yang memuat data di antaranya tautan, judul, kategori, dan id berita.
 
 Contoh hasil keluaran:
 ```
@@ -34,8 +34,8 @@ Contoh hasil keluaran:
     ],
       "status": "ok",
       "total": 10
-    }
-    ```
+}
+```
 
     ### Fungsi
 * list berita
