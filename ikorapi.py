@@ -7,7 +7,7 @@ import json
 from urlparse import urlparse
 
 
-kategori = ['persib','bandung','bandung-juara','jabar','jabar-kahiji','sport','edukasi','ekonomi','serba-serbi','selebritas','life-style','syiar','bogor']
+kategori = ['persib','bandung','bandung-juara','jabar','jabar-kahiji','sport','edukasi','ekonomi','serba-serbi','selebritas','life-style','syiar','bogor', 'wonderful-indonesia']
 cat_id = [i for i in xrange(len(kategori))]
 dict_cat = dict(zip(cat_id, kategori))
 
@@ -21,6 +21,8 @@ def getUrl(url):
     linkBerita = []
     judul = []
     gambar = []
+    penulis = []
+    waktu = []
     berita = {}
     link_berita = ''
     url = urllib.urlopen(url)
@@ -43,6 +45,17 @@ def getUrl(url):
             q = urlparse(gmbr).query.split('&')[0].strip('file=')
             qgambar = urlInilah + '/gallery/' + q
             gambar.append(qgambar)
+        #ambil nama penulis
+        pi = 0
+        for p in link.find_all('div',{'class':'cssTextSmall'}):
+            for r in p.find_all('span'):
+                if pi ==1:
+                    pen = r.get_text().strip().encode("utf-8").partition(" ")[2]
+                    penulis.append(pen)
+                if pi == 2:
+                    wkt = r.get_text().strip().encode("utf-8")
+                    waktu.append(wkt)
+                pi += 1
 
     lg = len(gambar)
     llb= len(link_berita)
@@ -52,6 +65,7 @@ def getUrl(url):
         print beda
         for i in xrange(beda):
             gambar.append('')
+
 
     # masukkan ke dict
     dicSize = len(linkBerita)
@@ -63,6 +77,8 @@ def getUrl(url):
         berita['link'] = linkBerita[k]
         berita['judul'] = judul[k]
         berita['img'] = gambar[k]
+        berita['penulis'] = penulis[k]
+        berita['waktu'] = waktu[k]
         hasil.append(berita)
         berita = {}
 
@@ -85,3 +101,21 @@ def getIdFromCat(cat):
     for k, v in dict_cat.iteritems():
         if v == cat:
             return k
+
+# tes ambil data penulis dan tanggal. kalau berhasil nanti dimasukkan ke getUrl
+def getDate(url):
+    url = urllib.urlopen(url)
+    result = url.read()
+    url.close()
+    soup = BeautifulSoup(result, "html.parser")
+    for link in soup.find_all('li',{'class':'cssLineB'}):
+        i = 0
+        for p in link.find_all('div',{'class':'cssTextSmall'}):
+            for r in p.find_all('span'):
+                if i == 1:
+                    print r.get_text().strip().encode("utf-8").partition(" ")[2]
+                if i == 2:
+                    print r.get_text().strip().encode("utf-8")
+                i += 1
+
+#getDate('http://www.inilahkoran.com/berita?page=0')
