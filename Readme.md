@@ -1,5 +1,5 @@
 # apiapi
-Latihan (lagi) membuat API menggunakan python dan kawan-kawannya. Kali ini disimpan di Heroku. Hasilnya bisa dicoba di [sini.](hhttps://apiapikor.herokuapp.com/api/v1.0/news)
+Latihan (lagi) membuat API menggunakan python dan kawan-kawannya. Kali ini disimpan di Heroku. Hasilnya bisa dicoba di [sini.](https://apiapikor.herokuapp.com/api/v1.0/news)
 
 Studi kasus: mengambil daftar berita (scraping menggunakan librari Bs4) dari situs [inilahkoran](http://www.inilahkoran.com). Keluaran berupa berkas json yang memuat data tautan, judul, kategori, dan id berita.
 
